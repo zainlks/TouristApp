@@ -15,15 +15,14 @@ var placesClient: GMSPlacesClient!
 let locationManager = CLLocationManager()
 
 
-struct mapHandle {
+class mapHandle {
 //    
 //    init(_ mapView:GMSMapView) {
 //        self.mainView = mapView
 //    }
     func performRequest() {
-        if let url = URL(string: "https://maps.googleapis.com/maps/api/place/textsearch/json?query=top%2010%20things%20to%20do%20in%2038%20fogerty%20street&key=AIzaSyA2Yaa5DnJAwgSzgAr3ITT5yuyZag4v57o") {
-            
-            
+        var tempString:String? = curLocationAdress?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        if let url = URL(string: "https://maps.googleapis.com/maps/api/place/textsearch/json?query=top%2010%20things%20to%20do%20near%20" + tempString! + "&key=AIzaSyA2Yaa5DnJAwgSzgAr3ITT5yuyZag4v57o") {
             
             let session = URLSession(configuration: .default)
             
@@ -38,10 +37,7 @@ struct mapHandle {
                        self.parseJson(incomingData)
                    }
                })
-            
             task.resume()
-            
-            
         }
         
     }
@@ -52,17 +48,29 @@ struct mapHandle {
             
             let decodedData = try decoder.decode(mapQueryData.self, from: inData)
             print(decodedData.results.count)
-            
-            
-            
-            
-            
+            for i in 0...decodedData.results.count-1 {
+                resultsList.append(Results(decodedData.results[i].name,decodedData.results[i].geometry))
+            }
+            print(resultsList[0].geometry.location.lat)
+            updateMapData()
             
         } catch {
-            
+            print("eroor Occured")
         }
     }
     
+    func updateMapData() {
+        print(resultsList.count)
+        DispatchQueue.main.async {
+            for i in 0...resultsList.count-1 {
+                let marker = GMSMarker()
+                let newMarkerLoc = CLLocationCoordinate2DMake(resultsList[i].geometry.location.lat, resultsList[i].geometry.location.lng)
+                marker.position = newMarkerLoc
+                marker.title = resultsList[i].name
+                marker.map = self.mainView!
+            }
+        }
+    }
     
     func getCurLocation() {
          placesClient.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
@@ -86,6 +94,8 @@ struct mapHandle {
                 self.mainView!.animate(toLocation: newLoc)
                  let marker = GMSMarker()
                  marker.position = CLLocationCoordinate2D(latitude:place.coordinate.latitude, longitude: place.coordinate.longitude)
+                self.curLocationAdress = place.formattedAddress
+                print(self.curLocationAdress!)
                 marker.title = place.formattedAddress
                 marker.isDraggable = true
                 marker.map = self.mainView!
@@ -95,6 +105,7 @@ struct mapHandle {
          })
      }
     var mainView:GMSMapView?
+    var curLocationAdress:String?
 }
 
 
