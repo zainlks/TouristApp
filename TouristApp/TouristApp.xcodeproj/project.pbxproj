@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,10 @@
 		34C91A2B242969520067F94A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34C91A29242969520067F94A /* LaunchScreen.storyboard */; };
 		34C91A36242969520067F94A /* TouristAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C91A35242969520067F94A /* TouristAppTests.swift */; };
 		34C91A41242969520067F94A /* TouristAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C91A40242969520067F94A /* TouristAppUITests.swift */; };
+		34E47601246E4A79004C2038 /* mapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E47600246E4A79004C2038 /* mapStyle.json */; };
+		34E47603246E556E004C2038 /* mapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E47602246E556E004C2038 /* mapController.swift */; };
+		34E47605246E795F004C2038 /* dataDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E47604246E795F004C2038 /* dataDecoding.swift */; };
+		5CC388008182414D44135873 /* libPods-TouristApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4B6349FA4D35E16B1074D14 /* libPods-TouristApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,12 @@
 		34C91A3C242969520067F94A /* TouristAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TouristAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		34C91A40242969520067F94A /* TouristAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristAppUITests.swift; sourceTree = "<group>"; };
 		34C91A42242969520067F94A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34E47600246E4A79004C2038 /* mapStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mapStyle.json; sourceTree = "<group>"; };
+		34E47602246E556E004C2038 /* mapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapController.swift; sourceTree = "<group>"; };
+		34E47604246E795F004C2038 /* dataDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataDecoding.swift; sourceTree = "<group>"; };
+		47CE95620B8881DFFA9C7F75 /* Pods-TouristApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristApp.release.xcconfig"; path = "Target Support Files/Pods-TouristApp/Pods-TouristApp.release.xcconfig"; sourceTree = "<group>"; };
+		E4B6349FA4D35E16B1074D14 /* libPods-TouristApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TouristApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E548ECEC729665E016EC5B9E /* Pods-TouristApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristApp.debug.xcconfig"; path = "Target Support Files/Pods-TouristApp/Pods-TouristApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CC388008182414D44135873 /* libPods-TouristApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +94,8 @@
 				34C91A34242969520067F94A /* TouristAppTests */,
 				34C91A3F242969520067F94A /* TouristAppUITests */,
 				34C91A1C242969510067F94A /* Products */,
+				B6CD5C2E7DD8420305333885 /* Pods */,
+				AC5DE79D5F20411679F70738 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +114,9 @@
 			children = (
 				34C91A1E242969520067F94A /* AppDelegate.swift */,
 				34C91A20242969520067F94A /* SceneDelegate.swift */,
+				34E47600246E4A79004C2038 /* mapStyle.json */,
+				34E47602246E556E004C2038 /* mapController.swift */,
+				34E47604246E795F004C2038 /* dataDecoding.swift */,
 				34C91A22242969520067F94A /* ViewController.swift */,
 				34C91A24242969520067F94A /* Main.storyboard */,
 				34C91A27242969520067F94A /* Assets.xcassets */,
@@ -128,6 +144,23 @@
 			path = TouristAppUITests;
 			sourceTree = "<group>";
 		};
+		AC5DE79D5F20411679F70738 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4B6349FA4D35E16B1074D14 /* libPods-TouristApp.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B6CD5C2E7DD8420305333885 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E548ECEC729665E016EC5B9E /* Pods-TouristApp.debug.xcconfig */,
+				47CE95620B8881DFFA9C7F75 /* Pods-TouristApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +168,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34C91A45242969520067F94A /* Build configuration list for PBXNativeTarget "TouristApp" */;
 			buildPhases = (
+				FE10D8DB832E8DA4E530C145 /* [CP] Check Pods Manifest.lock */,
 				34C91A17242969510067F94A /* Sources */,
 				34C91A18242969510067F94A /* Frameworks */,
 				34C91A19242969510067F94A /* Resources */,
+				77D449820D70DE20B3292407 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -232,6 +267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E47601246E4A79004C2038 /* mapStyle.json in Resources */,
 				34C91A2B242969520067F94A /* LaunchScreen.storyboard in Resources */,
 				34C91A28242969520067F94A /* Assets.xcassets in Resources */,
 				34C91A26242969520067F94A /* Main.storyboard in Resources */,
@@ -254,13 +290,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		77D449820D70DE20B3292407 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TouristApp/Pods-TouristApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TouristApp/Pods-TouristApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TouristApp/Pods-TouristApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE10D8DB832E8DA4E530C145 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TouristApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		34C91A17242969510067F94A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E47603246E556E004C2038 /* mapController.swift in Sources */,
 				34C91A23242969520067F94A /* ViewController.swift in Sources */,
 				34C91A1F242969520067F94A /* AppDelegate.swift in Sources */,
+				34E47605246E795F004C2038 /* dataDecoding.swift in Sources */,
 				34C91A21242969520067F94A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,6 +512,7 @@
 		};
 		34C91A46242969520067F94A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E548ECEC729665E016EC5B9E /* Pods-TouristApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -450,6 +531,7 @@
 		};
 		34C91A47242969520067F94A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47CE95620B8881DFFA9C7F75 /* Pods-TouristApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
