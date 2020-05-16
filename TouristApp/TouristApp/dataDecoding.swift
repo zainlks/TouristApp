@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 
 struct mapQueryData: Decodable {
@@ -14,13 +15,15 @@ struct mapQueryData: Decodable {
 }
 
 struct Results: Decodable {
-    init(_ name:String, _ geometry:Geometry) {
+    init(_ name:String, _ geometry:Geometry, _ address:String) {
         self.name = name
         self.geometry = geometry
+        self.formatted_address = address
     }
     
     let name:String
     let geometry:Geometry
+    let formatted_address:String
 }
 
 struct Geometry: Decodable {
@@ -32,4 +35,25 @@ struct Location: Decodable {
     let lng:Double
 }
 var resultsList:[Results] = []
+var coordinatesList:[CLLocationCoordinate2D] = []
+
+
+
+struct routeQueryData: Decodable {
+    let routes:[Routes]
+}
+
+struct Routes: Decodable {
+    let legs:[Legs]
+}
+
+struct Legs: Decodable {
+    let steps:[Steps]
+}
+
+struct Steps: Decodable {
+    let start_location:Location
+    let end_location:Location
+}
+
 //var placeList: [String:Results]

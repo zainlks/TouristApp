@@ -20,8 +20,9 @@ class mapHandle {
 //    init(_ mapView:GMSMapView) {
 //        self.mainView = mapView
 //    }
-    func performRequest() {
-        var tempString:String? = curLocationAdress?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+    func performRequest(_ userPlace:String?) {
+        
+        var tempString:String? = userPlace?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         if let url = URL(string: "https://maps.googleapis.com/maps/api/place/textsearch/json?query=top%2010%20things%20to%20do%20near%20" + tempString! + "&key=AIzaSyA2Yaa5DnJAwgSzgAr3ITT5yuyZag4v57o") {
             
             let session = URLSession(configuration: .default)
@@ -48,8 +49,12 @@ class mapHandle {
             
             let decodedData = try decoder.decode(mapQueryData.self, from: inData)
             print(decodedData.results.count)
+            resultsList = []
+            coordinatesList = []
             for i in 0...decodedData.results.count-1 {
-                resultsList.append(Results(decodedData.results[i].name,decodedData.results[i].geometry))
+                coordinatesList.append(CLLocationCoordinate2DMake(decodedData.results[i].geometry.location.lat, decodedData.results[i].geometry.location.lng))
+                resultsList.append(Results(decodedData.results[i].name,decodedData.results[i].geometry, decodedData.results[i].formatted_address))
+//                path.add(CLLocationCoordinate2DMake(decodedData.results[i].geometry.location.lat, decodedData.results[i].geometry.location.lng))
             }
             print(resultsList[0].geometry.location.lat)
             updateMapData()
@@ -61,18 +66,34 @@ class mapHandle {
     
     func updateMapData() {
         print(resultsList.count)
-        DispatchQueue.main.async {
+        DispatchQueue.main.sync {
+            self.mainView!.clear()
+            var bounds = GMSCoordinateBounds.init()
             for i in 0...resultsList.count-1 {
                 let marker = GMSMarker()
                 let newMarkerLoc = CLLocationCoordinate2DMake(resultsList[i].geometry.location.lat, resultsList[i].geometry.location.lng)
                 marker.position = newMarkerLoc
                 marker.title = resultsList[i].name
                 marker.map = self.mainView!
+                bounds = bounds.includingCoordinate(newMarkerLoc)
+                if(i != 0 && i != resultsList.count-1) {
+                    dispatchGroup.enter()
+                    routeHandler.requestRoute(resultsList[i].formatted_address, resultsList[i+1].formatted_address)
+                }
             }
+//            routeHandler.requestRoute(resultsList[0].formatted_address, resultsList[1].formatted_address)
+            dispatchGroup.wait()
+//            let newLoc = GMSCameraPosition(latitude: resultsList[0].geometry.location.lat, longitude: resultsList[0].geometry.location.lng, zoom: 14.0)
+            let newLoc = self.mainView!.camera(for: bounds, insets: UIEdgeInsets())
+            self.mainView!.camera = newLoc!
+            let connectingLine = GMSPolyline(path: self.path)
+            connectingLine.strokeWidth = 4.0
+            connectingLine.geodesic = true
+            connectingLine.map = self.mainView!
         }
     }
     
-    func getCurLocation() {
+    func getCurLocation() -> String?{
          placesClient.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
            if let error = error {
              print("Current Place error: \(error.localizedDescription)")
@@ -103,9 +124,14 @@ class mapHandle {
              }
            }
          })
+        return curLocationAdress
      }
+    
+    
     var mainView:GMSMapView?
     var curLocationAdress:String?
+    let path = GMSMutablePath()
+    let dispatchGroup = DispatchGroup()
 }
 
 

@@ -50,7 +50,6 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         
         mapClass.getCurLocation()
-
         // Do any additional setup after loading the view.
     }
     
@@ -60,21 +59,25 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
             print(tempVar)
         }
         else {print("nothing in text field")}
-        mapClass.performRequest()
+        mapClass.performRequest(locationTextField.text)
     }
     
     @IBAction func curLocButtonPressed(_ sender: UIButton) {
-        mapClass.getCurLocation()
+        mapClass.performRequest(mapClass.getCurLocation())
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         locationTextField.endEditing(true)
         return true
     }
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        locationTextField.text = " "
+    }
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         locationTextField.endEditing(true)
-        locationTextField.placeholder = "Enter your location here"
+        mapClass.performRequest(locationTextField.text)
     }
+    
     
     
     
