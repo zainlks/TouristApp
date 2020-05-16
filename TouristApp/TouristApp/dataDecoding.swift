@@ -35,9 +35,8 @@ struct Location: Decodable {
     let lng:Double
 }
 var resultsList:[Results] = []
+
 var coordinatesList:[CLLocationCoordinate2D] = []
-
-
 
 struct routeQueryData: Decodable {
     let routes:[Routes]
@@ -49,6 +48,7 @@ struct Routes: Decodable {
 
 struct Legs: Decodable {
     let steps:[Steps]
+    let distance:Distance
 }
 
 struct Steps: Decodable {
@@ -56,4 +56,7 @@ struct Steps: Decodable {
     let end_location:Location
 }
 
+struct Distance: Decodable {
+    let value:Int
+}
 //var placeList: [String:Results]
