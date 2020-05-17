@@ -19,7 +19,7 @@ class routeHandle {
         var finalString:String? = "https://maps.googleapis.com/maps/api/directions/json?origin=" + startString! + "&destination="
         finalString = finalString! + endString! + "&key=AIzaSyA2Yaa5DnJAwgSzgAr3ITT5yuyZag4v57o"
         
-//        print(finalString)
+        print(finalString)
         let url = URL(string: finalString!)
         
         let session = URLSession(configuration: .default)
@@ -42,11 +42,12 @@ class routeHandle {
         
         do {
             let decodedData = try decoder.decode(routeQueryData.self, from: inData)
+            print(decodedData.routes[0])
             for i in 0...decodedData.routes[0].legs[0].steps.count-1 {
 //                    print(decodedData.routes[0].legs[0].steps[i].start_location.lat)
                 mapClass.path.add(CLLocationCoordinate2DMake(decodedData.routes[0].legs[0].steps[i].start_location.lat,decodedData.routes[0].legs[0].steps[i].start_location.lng))
                 mapClass.path.add(CLLocationCoordinate2DMake(decodedData.routes[0].legs[0].steps[i].end_location.lat,decodedData.routes[0].legs[0].steps[i].end_location.lng))
-                    print("done")
+//                    print("done")
             }
             mapClass.dispatchGroup.leave()
         } catch {

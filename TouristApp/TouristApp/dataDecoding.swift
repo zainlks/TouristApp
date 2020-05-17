@@ -14,7 +14,7 @@ struct mapQueryData: Decodable {
     let results: [Results]
 }
 
-struct Results: Decodable {
+class Results: Decodable {
     init(_ name:String, _ geometry:Geometry, _ address:String) {
         self.name = name
         self.geometry = geometry

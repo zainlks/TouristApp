@@ -51,6 +51,8 @@ class mapHandle {
             print(decodedData.results.count)
             resultsList = []
             coordinatesList = []
+            if(decodedData.results.count>2)
+            {
             for i in 0...decodedData.results.count-1 {
                 coordinatesList.append(CLLocationCoordinate2DMake(decodedData.results[i].geometry.location.lat, decodedData.results[i].geometry.location.lng))
                 resultsList.append(Results(decodedData.results[i].name,decodedData.results[i].geometry, decodedData.results[i].formatted_address))
@@ -58,6 +60,10 @@ class mapHandle {
             }
             print(resultsList[0].geometry.location.lat)
             updateMapData()
+            }
+            else {
+                print("no results")
+            }
             
         } catch {
             print("eroor Occured")
@@ -77,8 +83,9 @@ class mapHandle {
                 marker.map = self.mainView!
                 bounds = bounds.includingCoordinate(newMarkerLoc)
                 if(i != 0 && i != resultsList.count-1) {
-                    dispatchGroup.enter()
-                    routeHandler.requestRoute(resultsList[i].formatted_address, resultsList[i+1].formatted_address)
+//                    dispatchGroup.enter()
+//                    routeHandler.requestRoute(resultsList[i].formatted_address, resultsList[i+1].formatted_address)
+                    mapClass.path.add(CLLocationCoordinate2DMake(resultsList[i].geometry.location.lat,resultsList[i].geometry.location.lng))
                 }
             }
 //            routeHandler.requestRoute(resultsList[0].formatted_address, resultsList[1].formatted_address)
