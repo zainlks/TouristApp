@@ -19,6 +19,7 @@
 		34E47603246E556E004C2038 /* mapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E47602246E556E004C2038 /* mapController.swift */; };
 		34E47605246E795F004C2038 /* dataDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E47604246E795F004C2038 /* dataDecoding.swift */; };
 		34E47607246F628E004C2038 /* routeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E47606246F628E004C2038 /* routeController.swift */; };
+		34EAE7EE24716FA000298341 /* SelectCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EAE7ED24716FA000298341 /* SelectCityViewController.swift */; };
 		5CC388008182414D44135873 /* libPods-TouristApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4B6349FA4D35E16B1074D14 /* libPods-TouristApp.a */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		34E47602246E556E004C2038 /* mapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapController.swift; sourceTree = "<group>"; };
 		34E47604246E795F004C2038 /* dataDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataDecoding.swift; sourceTree = "<group>"; };
 		34E47606246F628E004C2038 /* routeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = routeController.swift; sourceTree = "<group>"; };
+		34EAE7ED24716FA000298341 /* SelectCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCityViewController.swift; sourceTree = "<group>"; };
 		47CE95620B8881DFFA9C7F75 /* Pods-TouristApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristApp.release.xcconfig"; path = "Target Support Files/Pods-TouristApp/Pods-TouristApp.release.xcconfig"; sourceTree = "<group>"; };
 		E4B6349FA4D35E16B1074D14 /* libPods-TouristApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TouristApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E548ECEC729665E016EC5B9E /* Pods-TouristApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouristApp.debug.xcconfig"; path = "Target Support Files/Pods-TouristApp/Pods-TouristApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				34E47606246F628E004C2038 /* routeController.swift */,
 				34C91A22242969520067F94A /* ViewController.swift */,
 				34C91A24242969520067F94A /* Main.storyboard */,
+				34EAE7ED24716FA000298341 /* SelectCityViewController.swift */,
 				34C91A27242969520067F94A /* Assets.xcassets */,
 				34C91A29242969520067F94A /* LaunchScreen.storyboard */,
 				34C91A2C242969520067F94A /* Info.plist */,
@@ -345,6 +348,7 @@
 				34C91A23242969520067F94A /* ViewController.swift in Sources */,
 				34C91A1F242969520067F94A /* AppDelegate.swift in Sources */,
 				34E47605246E795F004C2038 /* dataDecoding.swift in Sources */,
+				34EAE7EE24716FA000298341 /* SelectCityViewController.swift in Sources */,
 				34C91A21242969520067F94A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

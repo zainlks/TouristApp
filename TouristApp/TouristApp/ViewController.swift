@@ -54,6 +54,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
     }
     
     @IBAction func searchPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "citySelectSegue", sender: self)
         locationTextField.endEditing(true)
         if let tempVar = locationTextField.text {
             print(tempVar)
@@ -77,10 +78,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         locationTextField.endEditing(true)
         mapClass.performRequest(locationTextField.text)
     }
-    
-    
-    
-    
+
 
 }
 
