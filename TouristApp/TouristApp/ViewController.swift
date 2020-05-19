@@ -60,7 +60,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
             print(tempVar)
         }
         else {print("nothing in text field")}
-        mapClass.performRequest(locationTextField.text)
+//        mapClass.performRequest(locationTextField.text)
     }
     
     @IBAction func curLocButtonPressed(_ sender: UIButton) {
