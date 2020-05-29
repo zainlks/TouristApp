@@ -58,25 +58,29 @@ class mapHandle {
                     resultsList.append(Results(decodedData.results[i].name,decodedData.results[i].geometry, decodedData.results[i].formatted_address))
     //                path.add(CLLocationCoordinate2DMake(decodedData.results[i].geometry.location.lat, decodedData.results[i].geometry.location.lng))
                 }
-                for x in 0...resultsList.count-1 {
-                    var tempDistance:[Double] = []
-                    for w in 0...resultsList.count-1 {
-                        if(resultsList[x].formatted_address != resultsList[w].formatted_address) {
-                            let tempVar = routeHandler.requestRoute(resultsList[x].formatted_address, resultsList[w].formatted_address)
-                            tempDistance.append(tempVar)
-                            
+                DispatchQueue.main.sync {
+                    for x in 0...resultsList.count-1 {
+                        var tempDistance:[Double] = []
+                        for w in 0...resultsList.count-1 {
+                            if(resultsList[x].formatted_address != resultsList[w].formatted_address) {
+                                self.dispatchGroup.enter()
+                                let tempVar = routeHandler.requestRoute(resultsList[x].formatted_address, resultsList[w].formatted_address)
+                                self.dispatchGroup.wait()
+                                 tempDistance.append(tempVar)
+                            }
+                            else{
+                                print("Starting and Ending Address the same, appending 0 -> mapContoller.swift")
+                                tempDistance.append(0.0)
+                            }
                         }
-                        else{
-                            print("Starting and Ending Address the same, appending 0 -> mapContoller.swift")
-                            tempDistance.append(0.0)
-                        }
+                        self.dispatchGroup.wait()
+                        distanceMatrix.append(tempDistance)
                     }
-                    distanceMatrix.append(tempDistance)
+    //                print(resultsList[0].geometry.location.lat)
+                    self.dispatchGroup.wait()
+                    print(distanceMatrix)
+                    self.updateMapData()
                 }
-//                print(resultsList[0].geometry.location.lat)
-                print(distanceMatrix)
-                self.updateMapData()
-                
                 
             }
             else {

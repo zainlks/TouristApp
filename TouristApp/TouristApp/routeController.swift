@@ -30,11 +30,13 @@ class routeHandle {
             if let incomingData = data {
 //                let dataString = String(data: incomingData, encoding: .utf8)
 //                print(dataString)
+                mapClass.dispatchGroup.enter()
                 requestedDistance = self.returnDistance(incomingData)
                 
             }
         })
             task.resume()
+        mapClass.dispatchGroup.wait()
             return requestedDistance
     }
     
@@ -46,10 +48,14 @@ class routeHandle {
             if(decodedData.status != "NOT_FOUND" && decodedData.status != "OVER_QUERY_LIMIT") {
                 print(decodedData.status)
                 print(decodedData.routes[0].legs[0].distance.value)
+                mapClass.dispatchGroup.leave()
+                mapClass.dispatchGroup.leave()
                 return(decodedData.routes[0].legs[0].distance.value)
             }
             else {
                 print(decodedData.status)
+                mapClass.dispatchGroup.leave()
+                mapClass.dispatchGroup.leave()
                 return 0
             }
         } catch {
