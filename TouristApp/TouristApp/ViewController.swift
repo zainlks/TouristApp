@@ -11,11 +11,10 @@ import GoogleMaps
 import GooglePlaces
 import CoreLocation
 
+
 class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
-    
-    @IBOutlet weak var locationTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         placesClient = GMSPlacesClient.shared()
@@ -45,9 +44,9 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         self.view.sendSubviewToBack(mapView)
 
         // Creates a marker in the center of the map.
-        locationTextField.delegate = self
-        locationTextField.attributedPlaceholder = NSAttributedString(string: locationTextField.placeholder!,
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+//        locationTextField.delegate = self
+//        locationTextField.attributedPlaceholder = NSAttributedString(string: locationTextField.placeholder!,
+//        attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         
         mapClass.getCurLocation()
         // Do any additional setup after loading the view.
@@ -55,11 +54,11 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
     
     @IBAction func searchPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: "citySelectSegue", sender: self)
-        locationTextField.endEditing(true)
-        if let tempVar = locationTextField.text {
-            print(tempVar)
-        }
-        else {print("nothing in text field")}
+//        locationTextField.endEditing(true)
+//        if let tempVar = locationTextField.text {
+//            print(tempVar)
+//        }
+//        else {print("nothing in text field")}
 //        mapClass.performRequest(locationTextField.text)
     }
     
@@ -67,16 +66,16 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         mapClass.performRequest(mapClass.getCurLocation())
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        locationTextField.endEditing(true)
+//        locationTextField.endEditing(true)
         return true
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        locationTextField.text = " "
+//        locationTextField.text = " "
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        locationTextField.endEditing(true)
-        mapClass.performRequest(locationTextField.text)
+//        locationTextField.endEditing(true)
+//        mapClass.performRequest(locationTextField.text)
     }
 
 

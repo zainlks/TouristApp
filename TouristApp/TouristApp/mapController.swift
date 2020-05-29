@@ -22,7 +22,7 @@ class mapHandle {
 //    }
     func performRequest(_ userPlace:String?) {
         
-        var tempString:String? = userPlace?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let tempString:String? = userPlace?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         if let url = URL(string: "https://maps.googleapis.com/maps/api/place/textsearch/json?query=top%2010%20things%20to%20do%20near%20" + tempString! + "&key=AIzaSyA2Yaa5DnJAwgSzgAr3ITT5yuyZag4v57o") {
             
             let session = URLSession(configuration: .default)
@@ -34,7 +34,7 @@ class mapHandle {
                    }
                    
                    if let incomingData = data {
-                       let dataString = String(data: incomingData, encoding: .utf8)
+//                       let dataString = String(data: incomingData, encoding: .utf8)
                        self.parseJson(incomingData)
                    }
                })
@@ -51,15 +51,27 @@ class mapHandle {
             print(decodedData.results.count)
             resultsList = []
             coordinatesList = []
-            if(decodedData.results.count>2)
+            if(decodedData.results.count>2) // Checking if google yielded any actual results
             {
-            for i in 0...decodedData.results.count-1 {
-                coordinatesList.append(CLLocationCoordinate2DMake(decodedData.results[i].geometry.location.lat, decodedData.results[i].geometry.location.lng))
-                resultsList.append(Results(decodedData.results[i].name,decodedData.results[i].geometry, decodedData.results[i].formatted_address))
-//                path.add(CLLocationCoordinate2DMake(decodedData.results[i].geometry.location.lat, decodedData.results[i].geometry.location.lng))
-            }
-            print(resultsList[0].geometry.location.lat)
-            updateMapData()
+                for i in 0...decodedData.results.count-1 {
+                    coordinatesList.append(CLLocationCoordinate2DMake(decodedData.results[i].geometry.location.lat, decodedData.results[i].geometry.location.lng))
+                    resultsList.append(Results(decodedData.results[i].name,decodedData.results[i].geometry, decodedData.results[i].formatted_address))
+    //                path.add(CLLocationCoordinate2DMake(decodedData.results[i].geometry.location.lat, decodedData.results[i].geometry.location.lng))
+                }
+                for x in 0...resultsList.count-1 {
+                    var tempDistance:[Double] = []
+                    for w in 0...resultsList.count-1 {
+                        if(resultsList[x].formatted_address != resultsList[w].formatted_address) {tempDistance.append(routeHandler.requestRoute(resultsList[x].formatted_address, resultsList[w].formatted_address))}
+                        else{
+                            tempDistance.append(0.0)
+                        }
+                    }
+                    distanceMatrix.append(tempDistance)
+                }
+//                print(resultsList[0].geometry.location.lat)
+                print(distanceMatrix)
+                updateMapData()
+                
             }
             else {
                 print("no results")

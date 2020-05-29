@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 
+var distanceMatrix:[[Double]] = []
 
 struct mapQueryData: Decodable {
     let results: [Results]
@@ -40,6 +41,7 @@ var coordinatesList:[CLLocationCoordinate2D] = []
 
 struct routeQueryData: Decodable {
     let routes:[Routes]
+    let status: String
 }
 
 struct Routes: Decodable {
@@ -57,6 +59,7 @@ struct Steps: Decodable {
 }
 
 struct Distance: Decodable {
-    let value:Int
+    let text:String
+    let value:Double
 }
 //var placeList: [String:Results]
