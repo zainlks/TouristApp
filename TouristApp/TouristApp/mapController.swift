@@ -61,8 +61,13 @@ class mapHandle {
                 for x in 0...resultsList.count-1 {
                     var tempDistance:[Double] = []
                     for w in 0...resultsList.count-1 {
-                        if(resultsList[x].formatted_address != resultsList[w].formatted_address) {tempDistance.append(routeHandler.requestRoute(resultsList[x].formatted_address, resultsList[w].formatted_address))}
+                        if(resultsList[x].formatted_address != resultsList[w].formatted_address) {
+                            let tempVar = routeHandler.requestRoute(resultsList[x].formatted_address, resultsList[w].formatted_address)
+                            tempDistance.append(tempVar)
+                            
+                        }
                         else{
+                            print("Starting and Ending Address the same, appending 0 -> mapContoller.swift")
                             tempDistance.append(0.0)
                         }
                     }
@@ -70,7 +75,8 @@ class mapHandle {
                 }
 //                print(resultsList[0].geometry.location.lat)
                 print(distanceMatrix)
-                updateMapData()
+                self.updateMapData()
+                
                 
             }
             else {
@@ -84,7 +90,7 @@ class mapHandle {
     
     func updateMapData() {
         print(resultsList.count)
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async {
             self.mainView!.clear()
             var bounds = GMSCoordinateBounds.init()
             for i in 0...resultsList.count-1 {
@@ -101,7 +107,6 @@ class mapHandle {
                 }
             }
 //            routeHandler.requestRoute(resultsList[0].formatted_address, resultsList[1].formatted_address)
-            dispatchGroup.wait()
 //            let newLoc = GMSCameraPosition(latitude: resultsList[0].geometry.location.lat, longitude: resultsList[0].geometry.location.lng, zoom: 14.0)
             let newLoc = self.mainView!.camera(for: bounds, insets: UIEdgeInsets())
             self.mainView!.camera = newLoc!

@@ -20,7 +20,7 @@ class routeHandle {
         var finalString:String? = "https://maps.googleapis.com/maps/api/directions/json?origin=" + startString! + "&destination="
         finalString = finalString! + endString! + "&key=AIzaSyA2Yaa5DnJAwgSzgAr3ITT5yuyZag4v57o"
         
-        print(finalString!)
+//        print(finalString!)
         let url = URL(string: finalString!)
         
         let session = URLSession(configuration: .default)
@@ -30,7 +30,7 @@ class routeHandle {
             if let incomingData = data {
 //                let dataString = String(data: incomingData, encoding: .utf8)
 //                print(dataString)
-               requestedDistance = self.returnDistance(incomingData)
+                requestedDistance = self.returnDistance(incomingData)
                 
             }
         })
@@ -70,7 +70,6 @@ class routeHandle {
                 mapClass.path.add(CLLocationCoordinate2DMake(decodedData.routes[0].legs[0].steps[i].end_location.lat,decodedData.routes[0].legs[0].steps[i].end_location.lng))
 //                    print("done")
             }
-            mapClass.dispatchGroup.leave()
         } catch {
             print("errorlksjd")
         }
